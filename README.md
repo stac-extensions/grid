@@ -1,14 +1,15 @@
-# Template Extension Specification
+# Grid Extension Specification
 
-- **Title:** Template
-- **Identifier:** <https://stac-extensions.github.io/template/v1.0.0/schema.json>
-- **Field Name Prefix:** template
-- **Scope:** Item, Collection
+- **Title:** Grid
+- **Identifier:** <https://stac-extensions.github.io/grid/v1.0.0/schema.json>
+- **Field Name Prefix:** grid
+- **Scope:** Item
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
-- **Owner**: @your-gh-handles @person2
+- **Owner**: @philvarner
 
-This document explains the Template Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
-This is the place to add a short introduction.
+This document explains the Grid Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
+
+TODO
 
 - Examples:
   - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item
@@ -16,38 +17,72 @@ This is the place to add a short introduction.
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
-## Item Properties and Collection Fields
+## Item Properties Fields
 
-| Field Name           | Type                      | Description |
-| -------------------- | ------------------------- | ----------- |
-| template:new_field   | string                    | **REQUIRED**. Describe the required field... |
-| template:xyz         | [XYZ Object](#xyz-object) | Describe the field... |
-| template:another_one | \[number]                 | Describe the field... |
+| Field Name | Type   | Description                                  |
+| ---------- | ------ | -------------------------------------------- |
+| grid:code  | string | **REQUIRED**. The identifier for the grid element associated with the Item. |
 
 ### Additional Field Information
 
-#### template:new_field
+#### grid:code
 
-This is a much more detailed description of the field `template:new_field`...
+This is a much more detailed description of the field `grid:code`...
 
-### XYZ Object
+##### Military Grid Reference System (MGRS)
 
-This is the introduction for the purpose and the content of the XYZ Object...
+https://en.wikipedia.org/wiki/Military_Grid_Reference_System
 
-| Field Name  | Type   | Description |
-| ----------- | ------ | ----------- |
-| x           | number | **REQUIRED**. Describe the required field... |
-| y           | number | **REQUIRED**. Describe the required field... |
-| z           | number | **REQUIRED**. Describe the required field... |
+- *Format String*: MGRS-{grid zone designator}-{latitude band}-{square}
+- *Example*: MGRS-35NKA
+- *Components*:
+  - grid zone designator: UTM grid zone
+  - latitude band: latitude band, lettered C-X (omitting the letters "I" and "O") 
+  - square: a pair of letters designating one of the 100km side grid squares within the grid zone + latitude band square. 
 
-## Relation types
+##### MODIS Sinusoidal Tile Grid
 
-The following types should be used as applicable `rel` types in the
-[Link Object](https://github.com/radiantearth/stac-spec/tree/master/item-spec/item-spec.md#link-object).
+Many MODIS products, including MCD43A4, MxD11A1, and MxD13A1.
 
-| Type                | Description |
-| ------------------- | ----------- |
-| fancy-rel-type      | This link points to a fancy resource. |
+https://modis-land.gsfc.nasa.gov/MODLAND_grid.html
+
+- *Example*: MSIN-h25v06
+
+##### Worldwide Reference System (WRS-1) 
+
+Landsat 1-3 WRS-1
+
+##### Worldwide Reference System (WRS-2) 
+
+Landsat 4, 5, 7, 8, and 9
+
+https://landsat.gsfc.nasa.gov/about/the-worldwide-reference-system/
+https://www.usgs.gov/media/images/world-reference-system-2-wrs-2-daydescending
+
+WRS2-097073
+
+##### Digital Orthophoto Quarter
+
+It represents one U.S. Geological Survey (USGS) 7.5-minute quadrangle. The Digital Orthophoto Quarter Quadrangle, (DOQQ) represents one quarter of the quadrangle. The names are based on that of the 7.5-minute quad
+
+DOQ-3510836
+
+
+##### Digital Orthophoto Quarter Quadrangle
+
+NAIP
+
+It represents one U.S. Geological Survey (USGS) 7.5-minute quadrangle. The Digital Orthophoto Quarter Quadrangle, (DOQQ) represents one quarter of the quadrangle. The names are based on that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ. The DOQQ’s scale is 1:12,000 scale or 1"=1,000', with 1-meter pixel resolution, and accuracy of +/ 33 feet. Individual states may have DOQ's that have higher accuracy standards depending on additional post-processing. 
+
+DOQQ-3510836SE
+
+
+##### Arbitrary Latitude / Longitude Grid
+
+Pseudo-gridding
+
+LLG-85.34_19.95_85.43_20.04
+LLG--20.34_-19.95_-19.43_-18.04
 
 ## Contributing
 
