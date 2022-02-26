@@ -9,7 +9,16 @@
 
 This document explains the Grid Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
 
-TODO
+The purpose of the Grid Extension is to provide fields related to gridded data products.
+
+There are two main uses of the `grid:code` field defined in this specification. The first
+is that it allows for precise aggregation in databases that support is of the number of
+Items that exist for a specific grid square. 
+
+slightly different footprints -- Landsat 8 are often off by a few pixels from each other.
+MODIS sinusoidal is a continuous curve in EPSG:4326
+
+Allow display of a pre-calculated geometry and a reasonable resolution?
 
 - Examples:
   - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item
@@ -44,11 +53,11 @@ This is a much more detailed description of the field `grid:code`...
 
 ##### MODIS Sinusoidal Tile Grid
 
-- *Format String*: MSIN-H{horizontal}V{vertical}
-- *Example*: MSIN-H25V06
+- *Format String*: MSIN-{horizontal}{vertical}
+- *Example*: MSIN-2506
 - *Components*:
-  - horizontal:
-  - vertical:
+  - horizontal: horizontal tile number
+  - vertical: vertical tile number
 - *Products*: many MODIS products, including MCD43A4, MxD11A1, and MxD13A1
 - *Reference*: <https://modis-land.gsfc.nasa.gov/MODLAND_grid.html>
 - *Related Extensions*: none
@@ -58,8 +67,8 @@ This is a much more detailed description of the field `grid:code`...
 - *Format String*: WRS1-{path}{row}
 - *Example*: WRS1-097073
 - *Components*:
-  - path:
-  - row:
+  - path: path number for nominal satellite orbital track
+  - row: latitudinal center line of a frame of imagery
 - *Products*: Landsat 1-3
 - *Reference*: <https://landsat.gsfc.nasa.gov/about/the-worldwide-reference-system/>
 - *Related Extensions*: none
@@ -69,8 +78,8 @@ This is a much more detailed description of the field `grid:code`...
 - *Format String*: WRS2-{path}{row}
 - *Example*: WRS2-097073
 - *Components*:
-  - path:
-  - row:
+  - path: path number for nominal satellite orbital tracks
+  - row: latitudinal center line of a frame of imagery
 - *Products*: Landsat 4, 5, 7, 8, and 9
 - *Reference*: <https://landsat.gsfc.nasa.gov/about/the-worldwide-reference-system/>
 - *Related Extensions*: none
@@ -80,25 +89,29 @@ This is a much more detailed description of the field `grid:code`...
 - *Format String*: DOQ-{quadrangle}
 - *Example*: DOQ-3510836
 - *Components*:
-  - quadrangle:
+  - quadrangle: code for the 7.5-minute quad
 - *Products*: early USGS digital aerial photographs and satellite images 
 - *Reference*: <https://en.wikipedia.org/wiki/Digital_orthophoto_quadrangle>
 - *Related Extensions*: none
 
-It represents one U.S. Geological Survey (USGS) 7.5-minute quadrangle. The Digital Orthophoto Quarter Quadrangle, (DOQQ) represents one quarter of the quadrangle. The names are based on that of the 7.5-minute quad
+Represents one U.S. Geological Survey (USGS) 7.5-minute quadrangle. The Digital
+Orthophoto Quarter Quadrangle (DOQQ) represents one quarter of the quadrangle.
+The names are based on that of the 7.5-minute quad.
 
 ##### Digital Orthophoto Quarter Quadrangle
 
 - *Format String*: DOQ-{quadrangle}{quarter}
 - *Example*: DOQ-3510836SE
 - *Components*:
-  - quadrangle:
+  - quadrangle: code for the 7.5-minute quad
   - quarter: NW, NE, SE, SW
 - *Products*: NAIP
 - *Reference*: <https://en.wikipedia.org/wiki/Digital_orthophoto_quadrangle>
 - *Related Extensions*: none
 
-It represents one U.S. Geological Survey (USGS) 7.5-minute quadrangle. The Digital Orthophoto Quarter Quadrangle, (DOQQ) represents one quarter of the quadrangle. The names are based on that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ. The DOQQ’s scale is 1:12,000 scale or 1"=1,000', with 1-meter pixel resolution, and accuracy of +/ 33 feet. Individual states may have DOQ's that have higher accuracy standards depending on additional post-processing.
+Represents one U.S. Geological Survey (USGS) 7.5-minute quadrangle. The Digital Orthophoto
+Quarter Quadrangle (DOQQ) represents one quarter of the quadrangle. The names are based on
+that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
 
 ## Contributing
 
