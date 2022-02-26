@@ -11,14 +11,13 @@ This document explains the Grid Extension to the [SpatioTemporal Asset Catalog](
 
 The purpose of the Grid Extension is to provide fields related to gridded data products.
 
-There are two main uses of the `grid:code` field defined in this specification. The first
-is that it allows for precise aggregation in databases that support is of the number of
-Items that exist for a specific grid square. 
+There are two main uses of the `grid:code` field defined in this specification. Both are primarily for use in supporting a "drill-down" path for a user exploring a dataset from a UI where there are too many results to display individually, so the user must first be presented with summary / aggregated data, and then drill down to individual items.
 
-slightly different footprints -- Landsat 8 are often off by a few pixels from each other.
-MODIS sinusoidal is a continuous curve in EPSG:4326
+The first
+is that it allows for precise aggregation in a STAC API implementation of Items that cover the same grid area. The STAC API [Aggregation Extension](https://github.com/radiantearth/stac-api-spec/pull/36) is a work-in-progress, but will eventually support aggregating over this field. 
 
-Allow display of a pre-calculated geometry and a reasonable resolution?
+The second aspect is that it helps for display when a gridded dataset has Items that either have slightly different footprints for Items over the same grid square (e.g., 
+Landsat 8 scenes are often off by a few pixels from each other, which makes them not an exact match). Some products with grids that are significantly different from EPSG:4326 have footprints that are far from a square after reprojection, such as MODIS sinusoidal having continuous curves. This an make the geometries very large. With a grid code defined for an Item, a UI could have a pre-determined geometry at a reasonable resolution for that grid square, and display it once for each all the Items in that grid square.
 
 - Examples:
   - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item
@@ -27,17 +26,17 @@ Allow display of a pre-calculated geometry and a reasonable resolution?
 
 ## Item Properties Fields
 
-| Field Name | Type   | Description                                  |
-| ---------- | ------ | -------------------------------------------- |
+| Field Name | Type   | Description                                                                 |
+| ---------- | ------ | --------------------------------------------------------------------------- |
 | grid:code  | string | **REQUIRED**. The identifier for the grid element associated with the Item. |
 
 ### Additional Field Information
 
 #### grid:code
 
-This is a much more detailed description of the field `grid:code`...
+The field `grid:code` defines a unique value for each grid square in a gridding. The code will be of the form `{grid designation}-{grid square code}`, where the grid designation is a short alphanumeric code for the grid (e.g., MGRS) and code is a short alphanumeric + "-" + "_" code for a specific grid square. 
 
-{grid}-{code}
+The grid code values below are recommended for these products. Implementers may also devise proprietary systems for their own griddings.
 
 ##### Military Grid Reference System (MGRS)
 
@@ -94,8 +93,7 @@ This is a much more detailed description of the field `grid:code`...
 - *Reference*: <https://en.wikipedia.org/wiki/Digital_orthophoto_quadrangle>
 - *Related Extensions*: none
 
-Represents one U.S. Geological Survey (USGS) 7.5-minute quadrangle. The Digital
-Orthophoto Quarter Quadrangle (DOQQ) represents one quarter of the quadrangle.
+Represents one U.S. Geological Survey (USGS) 7.5-minute quadrangle.
 The names are based on that of the 7.5-minute quad.
 
 ##### Digital Orthophoto Quarter Quadrangle
