@@ -7,17 +7,43 @@
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
 - **Owner**: @philvarner
 
+- [Grid Extension Specification](#grid-extension-specification)
+  - [Item Properties Fields](#item-properties-fields)
+    - [Additional Field Information](#additional-field-information)
+      - [grid:code](#gridcode)
+        - [Military Grid Reference System (MGRS)](#military-grid-reference-system-mgrs)
+        - [MODIS Sinusoidal Tile Grid](#modis-sinusoidal-tile-grid)
+        - [Worldwide Reference System (WRS-1)](#worldwide-reference-system-wrs-1)
+        - [Worldwide Reference System (WRS-2)](#worldwide-reference-system-wrs-2)
+        - [Digital Orthophoto Quadrangle](#digital-orthophoto-quadrangle)
+        - [Digital Orthophoto Quarter Quadrangle](#digital-orthophoto-quarter-quadrangle)
+  - [Contributing](#contributing)
+    - [Running tests](#running-tests)
+
 This document explains the Grid Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
 
 The purpose of the Grid Extension is to provide fields related to gridded data products.
 
-There are two main uses of the `grid:code` field defined in this specification. Both are primarily for use in supporting a "drill-down" path for a user exploring a dataset from a UI where there are too many results to display individually, so the user must first be presented with summary / aggregated data, and then drill down to individual items.
+There are two main uses of the `grid:code` field defined in this specification. Both are
+primarily for use in supporting a path for a user exploring a dataset from a UI where there
+are too many results to display individually, where the user must first be presented with
+summary / aggregated data, and then drill down to individual items.
 
 The first
-is that it allows for precise aggregation in a STAC API implementation of Items that cover the same grid area. The STAC API [Aggregation Extension](https://github.com/radiantearth/stac-api-spec/pull/36) is a work-in-progress, but will eventually support aggregating over this field. 
+is that it allows for precise aggregation in a STAC API implementation of Items that cover
+the same grid area. The STAC API [Aggregation Extension](https://github.com/radiantearth/stac-api-spec/pull/36)
+is a work-in-progress, but will eventually support aggregating over this field. 
 
-The second aspect is that it helps for display when a gridded dataset has Items that either have slightly different footprints for Items over the same grid square (e.g., 
-Landsat 8 scenes are often off by a few pixels from each other, which makes them not an exact match). Some products with grids that are significantly different from EPSG:4326 have footprints that are far from a square after reprojection, such as MODIS sinusoidal having continuous curves. This an make the geometries very large. With a grid code defined for an Item, a UI could have a pre-determined geometry at a reasonable resolution for that grid square, and display it once for each all the Items in that grid square.
+The second aspect is that it helps for display to a user when a gridded dataset has Items
+that have slightly different footprints for Items over the same grid square. For example, 
+Landsat 8 scenes for the same path/row grid square are often off by a few pixels from each
+other, which makes them not match exactly. Some products with grids that are significantly
+different from EPSG:4326 have footprints that are far from a square after reprojection, such
+how MODIS sinusoidal grid squares become increasingly curved as they move away from the
+equator and meridan. This can make the GeoJSON Polygon large, as more points must be added to
+maintain an accurate reprojected shape. With a grid code defined for an Item, a UI could have
+a pre-determined geometry at a reasonable resolution for that grid square, and display it
+once for each all the Items in that grid square.
 
 - Examples:
   - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item
@@ -34,9 +60,14 @@ Landsat 8 scenes are often off by a few pixels from each other, which makes them
 
 #### grid:code
 
-The field `grid:code` defines a unique value for each grid square in a gridding. The code will be of the form `{grid designation}-{grid square code}`, where the grid designation is a short alphanumeric code for the grid (e.g., MGRS) and code is a short alphanumeric + "-" + "_" code for a specific grid square. 
+The field `grid:code` defines a unique value for each grid square in a gridding. The code
+will be of the form `{grid designation}-{grid square code}`, where the grid designation is a
+short alphanumeric code for the grid (e.g., MGRS) and code is a short encoded value for a
+specific grid square. The encoded value for the square should consist of uppercase
+alphanumeric characters, underscore (`_`) (preferred separator), or minus sign (`-`).
 
-The grid code values below are recommended for these products. Implementers may also devise proprietary systems for their own griddings.
+The grid code values below are recommended for these products. Implementers may also devise
+proprietary systems for their own griddings.
 
 ##### Military Grid Reference System (MGRS)
 
@@ -44,8 +75,8 @@ The grid code values below are recommended for these products. Implementers may 
 - *Example*: MGRS-35NKA
 - *Components*:
   - grid zone designator: UTM grid zone
-  - latitude band: latitude band, lettered C-X (omitting the letters "I" and "O") 
-  - square: a pair of letters designating one of the 100km side grid squares within the grid zone + latitude band square. 
+  - latitude band: latitude band, lettered C-X (omitting the letters "I" and "O")
+  - square: a pair of letters designating one of the 100km side grid squares within the grid zone and latitude band square
 - *Products*: Sentinel-2
 - *Reference*: <https://en.wikipedia.org/wiki/Military_Grid_Reference_System>
 - *Related Extensions*: <https://github.com/stac-extensions/mgrs>
