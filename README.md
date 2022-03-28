@@ -17,6 +17,7 @@
         - [Worldwide Reference System (WRS-2)](#worldwide-reference-system-wrs-2)
         - [Digital Orthophoto Quadrangle](#digital-orthophoto-quadrangle)
         - [Digital Orthophoto Quarter Quadrangle](#digital-orthophoto-quarter-quadrangle)
+        - [Maxar ARD Tile Grid](#maxar-ard-tile-grid)
   - [Contributing](#contributing)
     - [Running tests](#running-tests)
 
@@ -141,6 +142,17 @@ The names are based on that of the 7.5-minute quad.
 Represents one U.S. Geological Survey (USGS) 7.5-minute quadrangle. The Digital Orthophoto
 Quarter Quadrangle (DOQQ) represents one quarter of the quadrangle. The names are based on
 that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
+
+##### Maxar ARD Tile Grid
+
+- *Format String*: MXRA-Z{zone}-{quadkey}
+- *Example*: MXRA-Z14-120200003323
+- *Components*:
+  - zone: UTM zone
+  - quadkey: 12-digit quadkey identifier
+- *Products*: Maxar ARD images and derivatives
+- *Reference*: [Maxar ARD Documentation](https://ard.maxar.com/docs/about/#the-maxar-data-grid)
+- *Related Extensions*: none
 
 ## Contributing
 
