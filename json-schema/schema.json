@@ -5,7 +5,7 @@
   "description": "STAC Grid Extension for STAC Items.",
   "oneOf": [
     {
-      "$comment": "This is the schema for STAC Items. Remove this object if this extension only applies to Collections.",
+      "$comment": "This is the schema for STAC Items",
       "allOf": [
         {
           "$ref": "#/definitions/stac_extensions"
@@ -24,7 +24,6 @@
             "properties": {
               "allOf": [
                 {
-                  "$comment": "Require fields here for Item Properties.",
                   "required": [
                     "grid:code"
                   ]
@@ -33,13 +32,6 @@
                   "$ref": "#/definitions/fields"
                 }
               ]
-            },
-            "assets": {
-              "$comment": "This validates the fields in Item Assets, but does not require them.",
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/fields"
-              }
             }
           }
         }
@@ -62,22 +54,21 @@
       }
     },
     "require_any_field": {
-      "$comment": "Please list all fields here so that we can force the existence of one of them in other parts of the schemas.",
       "anyOf": [
         {"required": ["grid:code"]}
       ]
     },
     "fields": {
-      "$comment": "Add your new fields here. Don't require them here, do that above in the corresponding schema.",
       "type": "object",
       "properties": {
         "grid:code": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[A-Z]+-[-_.A-Za-z0-9]+$"
         }
       },
       "patternProperties": {
         "^(?!grid:)": {
-          "$comment": "Above, change `grid` to the prefix of this extension"
+          "$comment": "Do not allow other fields with this prefix"
         }
       },
       "additionalProperties": false

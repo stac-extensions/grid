@@ -73,11 +73,12 @@ proprietary systems for their own griddings.
 ##### Military Grid Reference System (MGRS)
 
 - *Format String*: MGRS-{grid zone designator}{latitude band}{square}
-- *Example*: MGRS-35NKA
+- *Examples*: MGRS-35NKA, MGRS-35NKA1234, MGRS-35NKA123456, MGRS-35NKA12345678, MGRS-35NKA1234567890
 - *Components*:
   - grid zone designator: UTM grid zone
   - latitude band: latitude band, lettered C-X (omitting the letters "I" and "O")
-  - square: a pair of letters designating one of the 100km side grid squares within the grid zone and latitude band square
+  - square: a pair of letters designating one of the 100km side grid squares within the grid
+    zone and latitude band square, and optionally either 2, 4, 6, 8, or 10 additional digits
 - *Products*: Sentinel-2
 - *Reference*: <https://en.wikipedia.org/wiki/Military_Grid_Reference_System>
 - *Related Extensions*: <https://github.com/stac-extensions/mgrs>
