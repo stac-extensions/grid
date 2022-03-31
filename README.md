@@ -5,7 +5,7 @@
 - **Field Name Prefix:** grid
 - **Scope:** Item
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
-- **Owner**: @philvarner
+- **Owners**: @philvarner, @drwelby
 
 - [Grid Extension Specification](#grid-extension-specification)
   - [Item Properties Fields](#item-properties-fields)
