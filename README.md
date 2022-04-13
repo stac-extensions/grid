@@ -131,8 +131,8 @@ The names are based on that of the 7.5-minute quad.
 
 ##### Digital Orthophoto Quarter Quadrangle
 
-- *Format String*: DOQ-{quadrangle}{quarter}
-- *Example*: DOQ-3510836SE
+- *Format String*: DOQQ-{quadrangle}{quarter}
+- *Example*: DOQQ-3510836SE
 - *Components*:
   - quadrangle: code for the 7.5-minute quad
   - quarter: NW, NE, SE, SW
