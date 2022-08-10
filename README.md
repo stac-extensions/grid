@@ -155,6 +155,17 @@ that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
 - *Reference*: [Maxar ARD Documentation](https://ard.maxar.com/docs/about/#the-maxar-data-grid)
 - *Related Extensions*: none
 
+##### EASE-DGGS
+
+- *Format String*: EASE-DGGS-L{level}.{row-column for each level}
+- *Example*: EASE-DGGS-L0.405963, EASE-DGGS-L6.405963.33.22.22.99.99.99
+- *Components*:
+  - level: Grid refinement level. Ranges from 0 to 6 with 6 being the most granular level.
+  - row-column for each level: Grid cell row-column for each level in ascending level order (level 0 first), separated by ".". 
+- *Products*: In consideration for Satellogic ARD images and derivatives.
+- *Reference*: <https://www.tandfonline.com/doi/pdf/10.1080/20964471.2021.2017539>
+- *Related Extensions*: none
+
 ## Contributing
 
 All contributions are subject to the
