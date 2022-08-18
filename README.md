@@ -162,7 +162,7 @@ that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
 - *Components*:
   - level: Grid refinement level. Ranges from 0 to 6 with 6 being the most granular level.
   - row-column for each level: Grid cell row-column for each level in ascending level order (level 0 first), separated by ".". 
-- *Products*: In consideration for Satellogic ARD images and derivatives.
+- *Products*:
 - *Reference*: <https://www.tandfonline.com/doi/pdf/10.1080/20964471.2021.2017539>
 - *Related Extensions*: none
 
