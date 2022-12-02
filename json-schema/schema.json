@@ -63,7 +63,7 @@
       "properties": {
         "grid:code": {
           "type": "string",
-          "pattern": "^[A-Z]+-[-_.A-Za-z0-9]+$"
+          "pattern": "^[A-Z0-9]+-[-_.A-Za-z0-9]+$"
         }
       },
       "patternProperties": {
