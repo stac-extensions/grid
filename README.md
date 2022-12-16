@@ -4,7 +4,7 @@
 - **Identifier:** <https://stac-extensions.github.io/grid/v1.0.0/schema.json>
 - **Field Name Prefix:** grid
 - **Scope:** Item
-- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
+- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Pilot
 - **Owners**: @philvarner, @drwelby
 
 - [Grid Extension Specification](#grid-extension-specification)
