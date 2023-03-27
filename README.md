@@ -8,7 +8,6 @@
 - **Owners**: @philvarner, @drwelby
 
 - [Grid Extension Specification](#grid-extension-specification)
-  - [Overview](#overview)
   - [Item Properties Fields](#item-properties-fields)
     - [Additional Field Information](#additional-field-information)
       - [grid:code](#gridcode)
