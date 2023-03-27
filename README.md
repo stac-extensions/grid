@@ -1,13 +1,7 @@
 # Grid Extension Specification
 
-- **Title:** Grid
-- **Identifier:** <https://stac-extensions.github.io/grid/v1.0.0/schema.json>
-- **Field Name Prefix:** grid
-- **Scope:** Item
-- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Pilot
-- **Owners**: @philvarner, @drwelby
-
 - [Grid Extension Specification](#grid-extension-specification)
+  - [Overview](#overview)
   - [Item Properties Fields](#item-properties-fields)
     - [Additional Field Information](#additional-field-information)
       - [grid:code](#gridcode)
@@ -18,8 +12,19 @@
         - [Digital Orthophoto Quadrangle](#digital-orthophoto-quadrangle)
         - [Digital Orthophoto Quarter Quadrangle](#digital-orthophoto-quarter-quadrangle)
         - [Maxar ARD Tile Grid](#maxar-ard-tile-grid)
+        - [EASE-DGGS](#ease-dggs)
+        - [Copernicus Digital Elevation Model Grid](#copernicus-digital-elevation-model-grid)
   - [Contributing](#contributing)
     - [Running tests](#running-tests)
+
+## Overview
+
+- **Title:** Grid
+- **Identifier:** <https://stac-extensions.github.io/grid/v1.0.0/schema.json>
+- **Field Name Prefix:** grid
+- **Scope:** Item
+- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Pilot
+- **Owners**: @philvarner, @drwelby
 
 This document explains the Grid Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
 
@@ -164,6 +169,18 @@ that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
   - row-column for each level: Grid cell row-column for each level in ascending level order (level 0 first), separated by ".". 
 - *Products*:
 - *Reference*: <https://www.tandfonline.com/doi/pdf/10.1080/20964471.2021.2017539>
+- *Related Extensions*: none
+
+##### Copernicus Digital Elevation Model Grid
+
+- *Format String*: CDEM-{resolution}\_{northing}\_{easting}
+- *Example*: CDEM-30_S90_00_W178_00
+- *Components*:
+  - resolution: resolution in arc seconds. `10` for GLO-30 and `30` for GLO-90.
+  - northing: latitude coordinate in decimal degrees where the decimal part is always 00, e.g., `S50_00`
+  - easting: longitude coordinate in decimal degrees where the decimal part is always 00, e.g., `W125_00`.
+- *Products*: Copernicus DEM GLO products
+- *Reference*: [Copernicus DEM Product Handbook](https://spacedata.copernicus.eu/documents/20123/122407/GEO1988-CopernicusDEM-SPE-002_ProductHandbook_I5.0+%281%29.pdf/706ee17d-2cce-f1fa-a73e-1686d28f09dd?t=1679657087883)
 - *Related Extensions*: none
 
 ## Contributing
