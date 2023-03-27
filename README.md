@@ -1,5 +1,12 @@
 # Grid Extension Specification
 
+- **Title:** Grid
+- **Identifier:** <https://stac-extensions.github.io/grid/v1.0.0/schema.json>
+- **Field Name Prefix:** grid
+- **Scope:** Item
+- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Pilot
+- **Owners**: @philvarner, @drwelby
+
 - [Grid Extension Specification](#grid-extension-specification)
   - [Overview](#overview)
   - [Item Properties Fields](#item-properties-fields)
@@ -16,15 +23,6 @@
         - [Copernicus Digital Elevation Model Grid](#copernicus-digital-elevation-model-grid)
   - [Contributing](#contributing)
     - [Running tests](#running-tests)
-
-## Overview
-
-- **Title:** Grid
-- **Identifier:** <https://stac-extensions.github.io/grid/v1.0.0/schema.json>
-- **Field Name Prefix:** grid
-- **Scope:** Item
-- **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Pilot
-- **Owners**: @philvarner, @drwelby
 
 This document explains the Grid Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
 
