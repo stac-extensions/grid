@@ -229,7 +229,8 @@ A few of the optimizations these use are:
 
 1. The prefix is a separate field, and only the unique idenifier part is specified
    in the `cells` list. This cuts all of the duplicate instances of the prefix from the file.
-2. Instead of a complete GeoJSON geometry defintion, only the coordinates are used. This cuts all of the duplicate instances of the type field from the file.
+2. Instead of a complete GeoJSON geometry defintion, only the coordinates are used. This cuts 
+   all of the duplicate instances of the type field from the file.
 3. Coordinate precision is set to 2 decimal places, which means it varies by no more than 1km at the equator.
 4. JSON is output in compact mode, with no line breaks, indentation, or spaces around the `:` and `,` characters.
 
@@ -269,7 +270,9 @@ python scripts/grid_maker.py CDEM GeoCellID 0 cdem.geojson > grid_maps/cdem.json
 
 - [NAIP: NAIP Quarter Quad and Seamline Shapefiles](https://www.fpacbc.usda.gov/geo/customer-service/naip-quarter-quad-shapefiles/index.html)
 
-Download all 48 (AK and HI are excluded) from [NAIP: NAIP Quarter Quad and Seamline Shapefiles](https://www.fpacbc.usda.gov/geo/customer-service/naip-quarter-quad-shapefiles/index.html) and put them in the scripts directory.
+Download all 48 (AK and HI are excluded) from
+[NAIP: NAIP Quarter Quad and Seamline Shapefiles](https://www.fpacbc.usda.gov/geo/customer-service/naip-quarter-quad-shapefiles/index.html)
+and put them in the scripts directory.
 
 ```bash
 cd scripts
