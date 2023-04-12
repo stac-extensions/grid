@@ -18,6 +18,8 @@
         - [Digital Orthophoto Quadrangle](#digital-orthophoto-quadrangle)
         - [Digital Orthophoto Quarter Quadrangle](#digital-orthophoto-quarter-quadrangle)
         - [Maxar ARD Tile Grid](#maxar-ard-tile-grid)
+        - [EASE-DGGS](#ease-dggs)
+        - [Copernicus Digital Elevation Model Grid](#copernicus-digital-elevation-model-grid)
   - [Contributing](#contributing)
     - [Running tests](#running-tests)
 
@@ -164,6 +166,17 @@ that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
   - row-column for each level: Grid cell row-column for each level in ascending level order (level 0 first), separated by ".". 
 - *Products*:
 - *Reference*: <https://www.tandfonline.com/doi/pdf/10.1080/20964471.2021.2017539>
+- *Related Extensions*: none
+
+##### Copernicus Digital Elevation Model Grid
+
+- *Format String*: CDEM-{northing}{easting}
+- *Example*: CDEM-S90W178
+- *Components*:
+  - northing: latitude coordinate in decimal degrees without the decimal `_00` part, e.g., `S50`.
+  - easting: longitude coordinate in decimal degrees without the decimal `_00` part, e.g., `W125`.
+- *Products*: Copernicus DEM GLO-30, GLO-90, and EEA-10 products in DGED format
+- *Reference*: [Copernicus DEM Product Handbook](https://spacedata.copernicus.eu/documents/20123/122407/GEO1988-CopernicusDEM-SPE-002_ProductHandbook_I5.0+%281%29.pdf/706ee17d-2cce-f1fa-a73e-1686d28f09dd?t=1679657087883)
 - *Related Extensions*: none
 
 ## Contributing
