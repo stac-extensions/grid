@@ -10,3 +10,11 @@ Thumbs.db
 .npm
 /node_modules/
 /package-lock.json
+
+WRS2_descending*
+wrs2.geojson
+__MACOSX/
+GEO1988-CopernicusDEM-RP-002_GridFile_I4.0_ESA*
+cdem.geojson
+S2A_OPER_GIP_TILPAR_MPC__20151209T095117_V20150622T000000_21000101T000000_B00.kml
+mgrs.geojson

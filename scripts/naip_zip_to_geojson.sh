@@ -20,5 +20,5 @@ do
   filename=$(basename -- "$f")
   filename_only="${filename%.*}"
   echo "$filename"
-  python ./grid_maker.py DOQQ APFONAME,QUADRANT "$f" > "$filename_only.json"
+  python ./grid_maker.py DOQQ APFONAME,QUADRANT 2 "$f" > "$filename_only.json"
 done

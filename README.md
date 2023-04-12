@@ -241,7 +241,7 @@ A few of the optimizations these use are:
 curl -O https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/atoms/files/WRS2_descending_0.zip
 unzip WRS2_descending_0.zip
 ogr2ogr -f GeoJSON -t_srs EPSG:4326 wrs2.geojson WRS2_descending.shp
-python ./scripts/grid_maker.py WRS2 PR wrs2.geojson > grid_maps/wrs2.json
+python ./scripts/grid_maker.py WRS2 PR 2 wrs2.geojson > grid_maps/wrs2.json
 ```
 
 ### Sentinel-2 (MGRS)
@@ -251,7 +251,7 @@ python ./scripts/grid_maker.py WRS2 PR wrs2.geojson > grid_maps/wrs2.json
 ```bash
 curl -O https://sentinels.copernicus.eu/documents/247904/1955685/S2A_OPER_GIP_TILPAR_MPC__20151209T095117_V20150622T000000_21000101T000000_B00.kml
 ogr2ogr -f GeoJSON -t_srs EPSG:4326 mgrs.geojson S2A_OPER_GIP_TILPAR_MPC__20151209T095117_V20150622T000000_21000101T000000_B00.kml
-python scripts/grid_maker.py MGRS Name mgrs.geojson > grid_maps/mgrs.json
+python scripts/grid_maker.py MGRS Name 3 mgrs.geojson > grid_maps/mgrs.json
 ```
 
 ### Copernicus DEM (CDEM)
@@ -262,7 +262,7 @@ python scripts/grid_maker.py MGRS Name mgrs.geojson > grid_maps/mgrs.json
 curl -O https://spacedata.copernicus.eu/documents/20123/122407/GEO1988-CopernicusDEM-RP-002_GridFile_I4.0_ESA.zip
 unzip GEO1988-CopernicusDEM-RP-002_GridFile_I4.0_ESA.zip
 ogr2ogr -f GeoJSON -t_srs EPSG:4326 cdem.geojson GEO1988-CopernicusDEM-RP-002_GridFile_I4.0_ESA.shp/GEO1988-CopernicusDEM-RP-002_GridFile_I4.0_ESA.shp
-python scripts/grid_maker.py CDEM GeoCellID cdem.geojson > grid_maps/cdem.json
+python scripts/grid_maker.py CDEM GeoCellID 0 cdem.geojson > grid_maps/cdem.json
 ```
 
 ### NAIP (DOQQ)
@@ -274,7 +274,7 @@ Download all 48 (AK and HI are excluded) from [NAIP: NAIP Quarter Quad and Seaml
 ```bash
 cd scripts
 ./naip_zip_to_geojson.sh
-./naip_merge.py > grid_maps/naip.json
+./naip_merge.py > grid_maps/doqq.json
 ```
 
 In the Tennessee 2018 geometries, NW3408508 is set with a null geometry. However,

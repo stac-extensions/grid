@@ -5,14 +5,11 @@ import sys
 from shapely import MultiPolygon
 from shapely.geometry import mapping, shape
 
-# Accepts 5 parameters
+# Accepts these parameters
 # 1 - The grid code prefix (e.g., WRS2)
 # 2 - A comma-separated value in the Feature Properties that is the unique grid code value
-# 3 - The input GeoJSON FeatureCollection filename
-
-
-DECIMAL_PLACES = 2
-
+# 3 - decimal precision, defaulting to 2
+# 4 - The input GeoJSON FeatureCollection filename
 
 def recursive_map(seq, func):
     for item in seq:
@@ -33,20 +30,27 @@ def geometry_type(geometry: Optional[dict[str, Any]]) -> Optional[str]:
     else:
         return None
 
+def deduplicate_linestring(linestring: list[(float, float)]):
+    return list(dict.fromkeys(((x[0], x[1]) for x in linestring)))
 
-def simplify_geometry(geometry: dict[str, Any]) -> Optional[dict[str, Any]]:
+def simplify_geometry(geometry: dict[str, Any], decimal_precision: int) -> Optional[dict[str, Any]]:
     modified_geometry = None
 
     if not geometry:
         print("Error: null geometry", file=sys.stderr)
     elif geometry["type"] in ["Polygon", "MultiPolygon"]:
+        coordinates = list(
+                recursive_map(
+                    geometry["coordinates"], lambda x: round(x, decimal_precision) if decimal_precision else round(x)
+                )
+            )
+        if geometry["type"] == "Polygon":
+            coordinates = [ deduplicate_linestring(c) for c in coordinates ]
+        else: # MultiPolygon
+            coordinates = [ [deduplicate_linestring(c2) for c2 in c1] for c1 in coordinates]
         modified_geometry = {
             "type": geometry["type"],
-            "coordinates": list(
-                recursive_map(
-                    geometry["coordinates"], lambda x: round(x, DECIMAL_PLACES)
-                )
-            ),
+            "coordinates": coordinates,
         }
     elif geometry["type"] == "GeometryCollection":
         # used by Sentinel-2 grids
@@ -54,7 +58,7 @@ def simplify_geometry(geometry: dict[str, Any]) -> Optional[dict[str, Any]]:
         modified_geometry = mapping(
             MultiPolygon(
                 [
-                    shape(simplify_geometry(g))
+                    shape(simplify_geometry(g, decimal_precision))
                     for g in geometry["geometries"]
                     if g["type"] == "Polygon"
                 ]
@@ -66,7 +70,8 @@ def simplify_geometry(geometry: dict[str, Any]) -> Optional[dict[str, Any]]:
 
 prefix = sys.argv[1]
 fields = sys.argv[2].split(",")
-filename_in = sys.argv[3]
+decimal_precision = int(sys.argv[3])
+filename_in = sys.argv[4]
 
 with open(filename_in, "r") as f:
     geojson = json.loads(f.read())
@@ -76,7 +81,7 @@ grid_mapping = {
     "prefix": prefix,
     "cells": {
         f'{"".join(f["properties"][x] for x in fields)}': simplify_geometry(
-            f["geometry"]
+            f["geometry"], decimal_precision
         )["coordinates"]
         for f in geojson["features"]
         if f.get("geometry")
