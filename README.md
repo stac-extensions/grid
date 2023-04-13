@@ -238,41 +238,53 @@ A few of the optimizations these use are:
 
 - [Landsat Landsat WRS 2 Descending Path Row Shapefile | U.S. Geological Survey](https://www.usgs.gov/media/files/landsat-wrs-2-descending-path-row-shapefile)
 
+These are defined as Polygons or MultiPolygons (across the antimeridian), and are all converted to MultiPolygons.
+
 ```bash
 curl -O https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/atoms/files/WRS2_descending_0.zip
 unzip WRS2_descending_0.zip
 ogr2ogr -f GeoJSON -t_srs EPSG:4326 wrs2.geojson WRS2_descending.shp
-python ./scripts/grid_maker.py WRS2 PR 2 wrs2.geojson > grid_maps/wrs2.json
+python ./scripts/grid_maker.py WRS2 PR 2 1 wrs2.geojson > grid_maps/wrs2.json
 ```
 
 ### Sentinel-2 (MGRS)
 
 - [Sentinel-2 scene boundaries](https://sentinels.copernicus.eu/documents/247904/1955685/S2A_OPER_GIP_TILPAR_MPC__20151209T095117_V20150622T000000_21000101T000000_B00.kml)
 
+This are defined as a GeometryCollection of Polygon and Points, which this converts to MultiPolygons.
+Antimeridan-spanning cells are handled with multiple Polygons.
+
 ```bash
 curl -O https://sentinels.copernicus.eu/documents/247904/1955685/S2A_OPER_GIP_TILPAR_MPC__20151209T095117_V20150622T000000_21000101T000000_B00.kml
 ogr2ogr -f GeoJSON -t_srs EPSG:4326 mgrs.geojson S2A_OPER_GIP_TILPAR_MPC__20151209T095117_V20150622T000000_21000101T000000_B00.kml
-python scripts/grid_maker.py MGRS Name 3 mgrs.geojson > grid_maps/mgrs.json
+python scripts/grid_maker.py MGRS Name 3 0 mgrs.geojson > grid_maps/mgrs.json
 ```
 
 ### Copernicus DEM (CDEM)
 
 - [COP-DEM](https://spacedata.copernicus.eu/documents/20123/122407/GEO1988-CopernicusDEM-RP-002_GridFile_I4.0_ESA.zip)
 
+These are all Polygons and have no antimeridian-spanning cells.
+
 ```bash
 curl -O https://spacedata.copernicus.eu/documents/20123/122407/GEO1988-CopernicusDEM-RP-002_GridFile_I4.0_ESA.zip
 unzip GEO1988-CopernicusDEM-RP-002_GridFile_I4.0_ESA.zip
 ogr2ogr -f GeoJSON -t_srs EPSG:4326 cdem.geojson GEO1988-CopernicusDEM-RP-002_GridFile_I4.0_ESA.shp/GEO1988-CopernicusDEM-RP-002_GridFile_I4.0_ESA.shp
-python scripts/grid_maker.py CDEM GeoCellID 0 cdem.geojson > grid_maps/cdem.json
+python scripts/grid_maker.py CDEM GeoCellID 0 0 cdem.geojson > grid_maps/cdem.json
 ```
 
 ### NAIP (DOQQ)
 
 - [NAIP: NAIP Quarter Quad and Seamline Shapefiles](https://www.fpacbc.usda.gov/geo/customer-service/naip-quarter-quad-shapefiles/index.html)
 
-Download all 48 (AK and HI are excluded) from
-[NAIP: NAIP Quarter Quad and Seamline Shapefiles](https://www.fpacbc.usda.gov/geo/customer-service/naip-quarter-quad-shapefiles/index.html)
-and put them in the scripts directory.
+These are all Polygons and within CONUS (no antimeridian-spanning cells).
+
+To process:
+
+1. Download all 48 (AK and HI are excluded) from
+  [NAIP: NAIP Quarter Quad and Seamline Shapefiles](https://www.fpacbc.usda.gov/geo/customer-service/naip-quarter-quad-shapefiles/index.html)
+  and put them in the scripts directory.
+2. run:
 
 ```bash
 cd scripts
