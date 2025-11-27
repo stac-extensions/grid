@@ -176,7 +176,7 @@ that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
   - northing: latitude coordinate in decimal degrees without the decimal `_00` part, e.g., `S50`.
   - easting: longitude coordinate in decimal degrees without the decimal `_00` part, e.g., `W125`.
 - *Products*: Copernicus DEM GLO-30, GLO-90, and EEA-10 products in DGED format
-- *Reference*: [Copernicus DEM Product Handbook](https://spacedata.copernicus.eu/documents/20123/122407/GEO1988-CopernicusDEM-SPE-002_ProductHandbook_I5.0+%281%29.pdf/706ee17d-2cce-f1fa-a73e-1686d28f09dd?t=1679657087883)
+- *Reference*: [Copernicus DEM Product Handbook](https://dataspace.copernicus.eu/sites/default/files/media/files/2024-06/geo1988-copernicusdem-spe-002_producthandbook_i5.0.pdf)
 - *Related Extensions*: none
 
 ## Contributing
