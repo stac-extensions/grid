@@ -21,6 +21,7 @@
       - [Maxar ARD Tile Grid](#maxar-ard-tile-grid)
       - [EASE-DGGS](#ease-dggs)
       - [Copernicus Digital Elevation Model Grid](#copernicus-digital-elevation-model-grid)
+      - [Major TOM Grid](#major-tom-grid)
 - [Contributing](#contributing)
 - [Running tests](#running-tests)
 - [Grid Maps](#grid-maps)
@@ -176,6 +177,23 @@ that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
   - `easting`: longitude coordinate in decimal degrees without the decimal `_00` part, e.g., `W125`.
 - *Products*: Copernicus DEM GLO-30, GLO-90, and EEA-10 products in DGED format
 - *Reference*: [Copernicus DEM Product Handbook](https://dataspace.copernicus.eu/sites/default/files/media/files/2024-06/geo1988-copernicusdem-spe-002_producthandbook_i5.0.pdf)
+
+##### Major TOM Grid
+
+- *Format String*: `MAJORTOM-{scale}-{row}_{column}`
+- *Example*: MAJORTOM-10-922D_249L
+- *Components*:
+  - `scale`: Scale of the grid in kilometers, 10 kilometer grid (`10`) is most commonly used.
+  - `row`: Row component of the cell identifier.
+    For example, `10U` is 10th row up and `922D` is 922nd row down with respect to 0 degrees.
+    See the paper for more details.
+  - `column`: Column component of the cell identifier.
+    For example, `249L` is 249th cell to the left and `23R` is 23rd cell to the right with respect to 0 degrees.
+    See the paper for more details.
+- *Products*: Major TOM Datasets
+- *Reference*:
+  - [Paper](https://arxiv.org/abs/2402.12095)
+  - [GitHub repository](https://github.com/ESA-PhiLab/Major-TOM)
 
 ## Contributing
 
