@@ -21,6 +21,7 @@
       - [Maxar ARD Tile Grid](#maxar-ard-tile-grid)
       - [EASE-DGGS](#ease-dggs)
       - [Copernicus Digital Elevation Model Grid](#copernicus-digital-elevation-model-grid)
+      - [EEA Reference Grid](#eea-reference-grid)
 - [Contributing](#contributing)
 - [Running tests](#running-tests)
 - [Grid Maps](#grid-maps)
@@ -176,6 +177,24 @@ that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
   - `easting`: longitude coordinate in decimal degrees without the decimal `_00` part, e.g., `W125`.
 - *Products*: Copernicus DEM GLO-30, GLO-90, and EEA-10 products in DGED format
 - *Reference*: [Copernicus DEM Product Handbook](https://dataspace.copernicus.eu/sites/default/files/media/files/2024-06/geo1988-copernicusdem-spe-002_producthandbook_i5.0.pdf)
+
+##### EEA Reference Grid
+
+- *Format String*: `EEA-{resolution}{easting}{northing}`
+- *Example*: EEA-100kmE31N36
+- *Components*:
+  - `resolution`: Recommended grid resolutions are `100m`, `1km`, `10km` and `100km`.
+    Alternatively, `25m` or `250m` resolution can be used for analysis purposes,
+    where the standard `100m` or `1km` grid cell size is not appropriate.
+    The resolution is denoted in meter (`m`) for cell sizes below 1000 meters and
+    kilometre (`km`) for cell sizes from 1000 meters and above.
+  - `northing` and `easting`: Reflects the distance of the lower left grid cell corner
+    from the false origin of the CRS. In order to reduce the length of the string,
+    Easting (`E`) and Northing (`N`) values are divided by $10^n$
+    (where $n$ is the number of zeros in the cell size value).
+- *Products*: CLMS datasets, e.g. CLMS High Resolution Layer Tree Cover and Forests
+- *Reference*: [About the EEA reference grid, Hermann Peifer, EEA, September 2011](https://www.eea.europa.eu/data-and-maps/data/eea-reference-grids-1/about-the-eea-reference-grid/eea_reference_grid_v1.pdf/at_download/file)
+- *Related Extensions*: none
 
 ## Contributing
 
