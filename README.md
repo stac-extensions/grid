@@ -1,4 +1,4 @@
-# Grid Extension Specification
+# Grid Extension Specification <!-- omit in toc -->
 
 - **Title:** Grid
 - **Identifier:** <https://stac-extensions.github.io/grid/v1.1.0/schema.json>
@@ -7,21 +7,27 @@
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Pilot
 - **Owners**: @philvarner, @drwelby
 
-- [Grid Extension Specification](#grid-extension-specification)
-  - [Item Properties Fields](#item-properties-fields)
-    - [Additional Field Information](#additional-field-information)
-      - [grid:code](#gridcode)
-        - [Military Grid Reference System (MGRS)](#military-grid-reference-system-mgrs)
-        - [MODIS Sinusoidal Tile Grid](#modis-sinusoidal-tile-grid)
-        - [Worldwide Reference System (WRS-1)](#worldwide-reference-system-wrs-1)
-        - [Worldwide Reference System (WRS-2)](#worldwide-reference-system-wrs-2)
-        - [Digital Orthophoto Quadrangle](#digital-orthophoto-quadrangle)
-        - [Digital Orthophoto Quarter Quadrangle](#digital-orthophoto-quarter-quadrangle)
-        - [Maxar ARD Tile Grid](#maxar-ard-tile-grid)
-        - [EASE-DGGS](#ease-dggs)
-        - [Copernicus Digital Elevation Model Grid](#copernicus-digital-elevation-model-grid)
-  - [Contributing](#contributing)
-    - [Running tests](#running-tests)
+---
+
+- [Item Properties Fields](#item-properties-fields)
+  - [Additional Field Information](#additional-field-information)
+    - [grid:code](#gridcode)
+      - [Military Grid Reference System (MGRS)](#military-grid-reference-system-mgrs)
+      - [MODIS Sinusoidal Tile Grid](#modis-sinusoidal-tile-grid)
+      - [Worldwide Reference System (WRS-1)](#worldwide-reference-system-wrs-1)
+      - [Worldwide Reference System (WRS-2)](#worldwide-reference-system-wrs-2)
+      - [Digital Orthophoto Quadrangle](#digital-orthophoto-quadrangle)
+      - [Digital Orthophoto Quarter Quadrangle](#digital-orthophoto-quarter-quadrangle)
+      - [Maxar ARD Tile Grid](#maxar-ard-tile-grid)
+      - [EASE-DGGS](#ease-dggs)
+      - [Copernicus Digital Elevation Model Grid](#copernicus-digital-elevation-model-grid)
+- [Contributing](#contributing)
+- [Running tests](#running-tests)
+- [Grid Maps](#grid-maps)
+  - [Landsat (WRS2)](#landsat-wrs2)
+  - [Sentinel-2 (MGRS)](#sentinel-2-mgrs)
+  - [Copernicus DEM (CDEM)](#copernicus-dem-cdem)
+  - [NAIP (DOQQ)](#naip-doqq)
 
 This document explains the Grid Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
 
