@@ -80,12 +80,12 @@ proprietary systems for their own griddings.
 
 ##### Military Grid Reference System (MGRS)
 
-- *Format String*: MGRS-{grid zone designator}{latitude band}{square}
+- *Format String*: `MGRS-{grid zone designator}{latitude band}{square}`
 - *Examples*: MGRS-35NKA, MGRS-35NKA1234, MGRS-35NKA123456, MGRS-35NKA12345678, MGRS-35NKA1234567890
 - *Components*:
-  - grid zone designator: UTM grid zone
-  - latitude band: latitude band, lettered C-X (omitting the letters "I" and "O")
-  - square: a pair of letters designating one of the 100km side grid squares within the grid
+  - `grid zone designator`: UTM grid zone
+  - `latitude band`: latitude band, lettered C-X (omitting the letters "I" and "O")
+  - `square`: a pair of letters designating one of the 100km side grid squares within the grid
     zone and latitude band square, and optionally either 2, 4, 6, 8, or 10 additional digits
 - *Products*: Sentinel-2
 - *Reference*: <https://en.wikipedia.org/wiki/Military_Grid_Reference_System>
@@ -93,97 +93,89 @@ proprietary systems for their own griddings.
 
 ##### MODIS Sinusoidal Tile Grid
 
-- *Format String*: MSIN-{horizontal}{vertical}
+- *Format String*: `MSIN-{horizontal}{vertical}`
 - *Example*: MSIN-2506
 - *Components*:
-  - horizontal: horizontal tile number
-  - vertical: vertical tile number
+  - `horizontal`: horizontal tile number
+  - `vertical`: vertical tile number
 - *Products*: many MODIS products, including MCD43A4, MxD11A1, and MxD13A1
 - *Reference*: <https://modis-land.gsfc.nasa.gov/MODLAND_grid.html>
-- *Related Extensions*: none
 
 ##### Worldwide Reference System (WRS-1)
 
-- *Format String*: WRS1-{path}{row}
+- *Format String*: `WRS1-{path}{row}`
 - *Example*: WRS1-097073
 - *Components*:
-  - path: path number for nominal satellite orbital track
-  - row: latitudinal center line of a frame of imagery
+  - `path`: path number for nominal satellite orbital track
+  - `row`: latitudinal center line of a frame of imagery
 - *Products*: Landsat 1-3
 - *Reference*: <https://landsat.gsfc.nasa.gov/about/the-worldwide-reference-system/>
-- *Related Extensions*: none
 
 ##### Worldwide Reference System (WRS-2)
 
-- *Format String*: WRS2-{path}{row}
+- *Format String*: `WRS2-{path}{row}`
 - *Example*: WRS2-097073
 - *Components*:
-  - path: path number for nominal satellite orbital tracks
-  - row: latitudinal center line of a frame of imagery
+  - `path`: path number for nominal satellite orbital tracks
+  - `row`: latitudinal center line of a frame of imagery
 - *Products*: Landsat 4, 5, 7, 8, and 9
 - *Reference*: <https://landsat.gsfc.nasa.gov/about/the-worldwide-reference-system/>
-- *Related Extensions*: none
 
 ##### Digital Orthophoto Quadrangle
-
-- *Format String*: DOQ-{quadrangle}
-- *Example*: DOQ-3510836
-- *Components*:
-  - quadrangle: code for the 7.5-minute quad
-- *Products*: early USGS digital aerial photographs and satellite images
-- *Reference*: <https://en.wikipedia.org/wiki/Digital_orthophoto_quadrangle>
-- *Related Extensions*: none
 
 Represents one U.S. Geological Survey (USGS) 7.5-minute quadrangle.
 The names are based on that of the 7.5-minute quad.
 
-##### Digital Orthophoto Quarter Quadrangle
-
-- *Format String*: DOQQ-{quadrangle}{quarter}
-- *Example*: DOQQ-3510836SE
+- *Format String*: DOQ-{quadrangle}
+- *Example*: DOQ-3510836
 - *Components*:
-  - quadrangle: code for the 7.5-minute quad
-  - quarter: NW, NE, SE, SW
-- *Products*: NAIP
+  - `quadrangle`: code for the 7.5-minute quad
+- *Products*: early USGS digital aerial photographs and satellite images
 - *Reference*: <https://en.wikipedia.org/wiki/Digital_orthophoto_quadrangle>
-- *Related Extensions*: none
+
+##### Digital Orthophoto Quarter Quadrangle
 
 Represents one U.S. Geological Survey (USGS) 7.5-minute quadrangle. The Digital Orthophoto
 Quarter Quadrangle (DOQQ) represents one quarter of the quadrangle. The names are based on
 that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
 
+- *Format String*: `DOQQ-{quadrangle}{quarter}`
+- *Example*: DOQQ-3510836SE
+- *Components*:
+  - `quadrangle`: code for the 7.5-minute quad
+  - `quarter`: NW, NE, SE, SW
+- *Products*: NAIP
+- *Reference*: <https://en.wikipedia.org/wiki/Digital_orthophoto_quadrangle>
+
 ##### Maxar ARD Tile Grid
 
-- *Format String*: MXRA-Z{zone}-{quadkey}
+- *Format String*: `MXRA-Z{zone}-{quadkey}`
 - *Example*: MXRA-Z14-120200003323
 - *Components*:
-  - zone: UTM zone
-  - quadkey: 12-digit quadkey identifier
+  - `zone`: UTM zone
+  - `quadkey`: 12-digit quadkey identifier
 - *Products*: Maxar ARD images and derivatives
 - *Reference*: [Maxar ARD Documentation](https://ard.maxar.com/docs/about/#the-maxar-data-grid)
-- *Related Extensions*: none
 
 ##### EASE-DGGS
 
-- *Format String*: EASE-DGGS-L{level}.{row-column for each level}
+- *Format String*: `EASE-DGGS-L{level}.{row-column for each level}`
 - *Example*: EASE-DGGS-L0.405963, EASE-DGGS-L6.405963.33.22.22.99.99.99
 - *Components*:
-  - level: Grid refinement level. Ranges from 0 to 6 with 6 being the most granular level.
-  - row-column for each level: Grid cell row-column for each level in ascending level order (level 0 first), separated by ".".
-- *Products*:
+  - `level`: Grid refinement level. Ranges from 0 to 6 with 6 being the most granular level.
+  - `row-column for each level`: Grid cell row-column for each level in ascending level order (level 0 first), separated by ".".
+- *Products*: unknown
 - *Reference*: <https://www.tandfonline.com/doi/pdf/10.1080/20964471.2021.2017539>
-- *Related Extensions*: none
 
 ##### Copernicus Digital Elevation Model Grid
 
-- *Format String*: CDEM-{northing}{easting}
+- *Format String*: `CDEM-{northing}{easting}`
 - *Example*: CDEM-S90W178
 - *Components*:
-  - northing: latitude coordinate in decimal degrees without the decimal `_00` part, e.g., `S50`.
-  - easting: longitude coordinate in decimal degrees without the decimal `_00` part, e.g., `W125`.
+  - `northing`: latitude coordinate in decimal degrees without the decimal `_00` part, e.g., `S50`.
+  - `easting`: longitude coordinate in decimal degrees without the decimal `_00` part, e.g., `W125`.
 - *Products*: Copernicus DEM GLO-30, GLO-90, and EEA-10 products in DGED format
 - *Reference*: [Copernicus DEM Product Handbook](https://dataspace.copernicus.eu/sites/default/files/media/files/2024-06/geo1988-copernicusdem-spe-002_producthandbook_i5.0.pdf)
-- *Related Extensions*: none
 
 ## Contributing
 
