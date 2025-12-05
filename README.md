@@ -195,7 +195,6 @@ that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
     (where $n$ is the number of zeros in the cell size value).
 - *Products*: CLMS datasets, e.g. CLMS High Resolution Layer Tree Cover and Forests
 - *Reference*: [About the EEA reference grid, Hermann Peifer, EEA, September 2011](https://www.eea.europa.eu/data-and-maps/data/eea-reference-grids-1/about-the-eea-reference-grid/eea_reference_grid_v1.pdf/at_download/file)
-- *Related Extensions*: none
 
 ##### Major TOM Grid
 
