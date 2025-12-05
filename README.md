@@ -22,6 +22,7 @@
       - [EASE-DGGS](#ease-dggs)
       - [Copernicus Digital Elevation Model Grid](#copernicus-digital-elevation-model-grid)
       - [EEA Reference Grid](#eea-reference-grid)
+      - [Major TOM Grid](#major-tom-grid)
 - [Contributing](#contributing)
 - [Running tests](#running-tests)
 - [Grid Maps](#grid-maps)
@@ -195,6 +196,23 @@ that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
 - *Products*: CLMS datasets, e.g. CLMS High Resolution Layer Tree Cover and Forests
 - *Reference*: [About the EEA reference grid, Hermann Peifer, EEA, September 2011](https://www.eea.europa.eu/data-and-maps/data/eea-reference-grids-1/about-the-eea-reference-grid/eea_reference_grid_v1.pdf/at_download/file)
 - *Related Extensions*: none
+
+##### Major TOM Grid
+
+- *Format String*: `MAJORTOM-{scale}-{row}_{column}`
+- *Example*: MAJORTOM-10-922D_249L
+- *Components*:
+  - `scale`: Scale of the grid in kilometers, 10 kilometer grid (`10`) is most commonly used.
+  - `row`: Row component of the cell identifier.
+    For example, `10U` is 10th row up and `922D` is 922nd row down with respect to 0 degrees.
+    See the paper for more details.
+  - `column`: Column component of the cell identifier.
+    For example, `249L` is 249th cell to the left and `23R` is 23rd cell to the right with respect to 0 degrees.
+    See the paper for more details.
+- *Products*: Major TOM Datasets
+- *Reference*:
+  - [Paper](https://arxiv.org/abs/2402.12095)
+  - [GitHub repository](https://github.com/ESA-PhiLab/Major-TOM)
 
 ## Contributing
 
