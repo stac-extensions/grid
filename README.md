@@ -23,6 +23,7 @@
       - [Copernicus Digital Elevation Model Grid](#copernicus-digital-elevation-model-grid)
       - [EEA Reference Grid](#eea-reference-grid)
       - [Major TOM Grid](#major-tom-grid)
+      - [SPOT Reference Grid (GRS)](#spot-reference-grid-grs)
 - [Contributing](#contributing)
 - [Running tests](#running-tests)
 - [Grid Maps](#grid-maps)
@@ -212,6 +213,27 @@ that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
 - *Reference*:
   - [Paper](https://arxiv.org/abs/2402.12095)
   - [GitHub repository](https://github.com/ESA-PhiLab/Major-TOM)
+
+##### SPOT Reference Grid (GRS)
+
+- *Format String*: `SPOTGRS-{K}_{J}`
+- *Examples*: SPOTGRS-597_276, SPOTGRS-090_353
+- *Components*:
+  - `K`: column number, written with 3 digits (zero-padded).
+    Outside the polar zones, the columns follow the SPOT reference tracks N (1 to 369):
+    column K = 2N-1 is west of track N and column K = 2N is east of it, so K goes from 001 to 738.
+  - `J`: row number, written with 3 digits (zero-padded).
+    Outside the polar zones, the rows are parallels, numbered from north to south from 200 to 500.
+    The north and south polar zones (beyond 71.7°) use a separate grid of nodes about 26 km apart,
+    centred on K = 100, J = 100 (north pole) and K = 100, J = 600 (south pole).
+- *Notes*: A scene gets the K and J of the grid node nearest to its centre.
+  A scene shifted along the track (SAT scene) keeps the K and J of its node;
+  the shift is not part of the grid code.
+- *Products*: SPOT 1 to 5 scenes, for example the SPOT World Heritage archive of CNES
+- *Reference*: SPOT Image, *Grille de Référence SPOT* (SI/GP/86.0005, annex 1),
+  available with the SPOT product specifications on the
+  [SPOT World Heritage documentation page](https://regards.cnes.fr/user/swh/modules/54)
+- *Related Extensions*: <https://github.com/CNES/spot-stac-extension>
 
 ## Contributing
 
