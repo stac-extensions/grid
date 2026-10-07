@@ -74,8 +74,12 @@ once for each all the Items in that grid square.
 The field `grid:code` defines a unique value for each grid square in a gridding. The code
 will be of the form `{grid designation}-{grid square code}`, where the grid designation is a
 short alphanumeric code for the grid (e.g., MGRS) and code is a short encoded value for a
-specific grid square. The encoded value for the square should consist of uppercase
-alphanumeric characters, underscore (`_`) (preferred separator), or minus sign (`-`).
+specific grid square. The encoded value for the square should consist of alphanumeric
+characters, underscore (`_`) (preferred separator), minus sign (`-`), or dot (`.`).
+Letters should be uppercase unless the format of the grid defines otherwise
+(e.g., the resolution `100km` in the EEA Reference Grid).
+Numeric components have the fixed width given for the grid and are padded with leading zeros,
+so that each grid square has exactly one code.
 
 The grid code values below are recommended for these products. Implementers may also devise
 proprietary systems for their own griddings.
@@ -85,7 +89,7 @@ proprietary systems for their own griddings.
 - *Format String*: `MGRS-{grid zone designator}{latitude band}{square}`
 - *Examples*: MGRS-35NKA, MGRS-35NKA1234, MGRS-35NKA123456, MGRS-35NKA12345678, MGRS-35NKA1234567890
 - *Components*:
-  - `grid zone designator`: UTM grid zone
+  - `grid zone designator`: UTM grid zone, two digits, e.g., `01` or `35`
   - `latitude band`: latitude band, lettered C-X (omitting the letters "I" and "O")
   - `square`: a pair of letters designating one of the 100km side grid squares within the grid
     zone and latitude band square, and optionally either 2, 4, 6, 8, or 10 additional digits
@@ -96,10 +100,10 @@ proprietary systems for their own griddings.
 ##### MODIS Sinusoidal Tile Grid
 
 - *Format String*: `MSIN-{horizontal}{vertical}`
-- *Example*: MSIN-2506
+- *Examples*: MSIN-2506, MSIN-0008
 - *Components*:
-  - `horizontal`: horizontal tile number
-  - `vertical`: vertical tile number
+  - `horizontal`: horizontal tile number, two digits (`00` to `35`)
+  - `vertical`: vertical tile number, two digits (`00` to `17`)
 - *Products*: many MODIS products, including MCD43A4, MxD11A1, and MxD13A1
 - *Reference*: <https://modis-land.gsfc.nasa.gov/MODLAND_grid.html>
 
@@ -108,8 +112,8 @@ proprietary systems for their own griddings.
 - *Format String*: `WRS1-{path}{row}`
 - *Example*: WRS1-097073
 - *Components*:
-  - `path`: path number for nominal satellite orbital track
-  - `row`: latitudinal center line of a frame of imagery
+  - `path`: path number for nominal satellite orbital track, three digits
+  - `row`: latitudinal center line of a frame of imagery, three digits
 - *Products*: Landsat 1-3
 - *Reference*: <https://landsat.gsfc.nasa.gov/about/the-worldwide-reference-system/>
 
@@ -118,8 +122,8 @@ proprietary systems for their own griddings.
 - *Format String*: `WRS2-{path}{row}`
 - *Example*: WRS2-097073
 - *Components*:
-  - `path`: path number for nominal satellite orbital tracks
-  - `row`: latitudinal center line of a frame of imagery
+  - `path`: path number for nominal satellite orbital tracks, three digits
+  - `row`: latitudinal center line of a frame of imagery, three digits
 - *Products*: Landsat 4, 5, 7, 8, and 9
 - *Reference*: <https://landsat.gsfc.nasa.gov/about/the-worldwide-reference-system/>
 
@@ -174,8 +178,10 @@ that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
 - *Format String*: `CDEM-{northing}{easting}`
 - *Example*: CDEM-S90W178
 - *Components*:
-  - `northing`: latitude coordinate in decimal degrees without the decimal `_00` part, e.g., `S50`.
-  - `easting`: longitude coordinate in decimal degrees without the decimal `_00` part, e.g., `W125`.
+  - `northing`: `N` or `S` followed by the latitude in whole degrees, two digits, e.g., `S50` or `N00`.
+  - `easting`: `E` or `W` followed by the longitude in whole degrees, three digits, e.g., `W125` or `E006`.
+- *Notes*: Each grid square is a 1° × 1° tile. The code refers to the lower left (south-west)
+  corner of the tile, as in the tile names of the Copernicus DEM (e.g., `N00_00_E006_00`).
 - *Products*: Copernicus DEM GLO-30, GLO-90, and EEA-10 products in DGED format
 - *Reference*: [Copernicus DEM Product Handbook](https://dataspace.copernicus.eu/sites/default/files/media/files/2024-06/geo1988-copernicusdem-spe-002_producthandbook_i5.0.pdf)
 
