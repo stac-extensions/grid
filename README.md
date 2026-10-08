@@ -23,6 +23,7 @@
       - [Copernicus Digital Elevation Model Grid](#copernicus-digital-elevation-model-grid)
       - [EEA Reference Grid](#eea-reference-grid)
       - [Major TOM Grid](#major-tom-grid)
+      - [Planet Ortho Tile Grid](#planet-ortho-tile-grid)
 - [Contributing](#contributing)
 - [Running tests](#running-tests)
 - [Grid Maps](#grid-maps)
@@ -212,6 +213,27 @@ that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
 - *Reference*:
   - [Paper](https://arxiv.org/abs/2402.12095)
   - [GitHub repository](https://github.com/ESA-PhiLab/Major-TOM)
+
+##### Planet Ortho Tile Grid
+
+The fixed UTM tile grid of the RapidEye and PlanetScope Ortho Tile products, originally defined
+as the RapidEye Tile Grid.
+
+- *Format String*: `PLOT-{zone}{row}{column}`
+- *Examples*: PLOT-3159121, PLOT-0547904
+- *Components*:
+  - `zone`: UTM zone, two digits (`01` to `60`)
+  - `row`: tile row, three digits (`001` to `780`), increasing from south to north
+  - `column`: tile column, two digits (`01` to `29`), increasing from west to east
+- *Notes*: The grid is defined by tile centres 24 km apart. Each tile extends 500 m beyond its
+  24 km × 24 km cell on every side, so it covers 25 km × 25 km and overlaps each adjacent tile by 1 km.
+  The centre of a tile in WGS 84 / UTM zone `{zone}` north (EPSG:326{zone}), in metres, is
+  x = 500000 + (column − 15) × 24000 + 12000 and y = (row − 391) × 24000 + 12000.
+  y has no false northing and is negative south of the equator; add 10000000 for EPSG:327{zone}.
+  Planet writes zones 1 to 9 without a leading zero in its tile ids (e.g., `547904`),
+  the grid code always uses two digits (e.g., `PLOT-0547904`).
+- *Products*: RapidEye Ortho Tile (L3A, `REOrthoTile`), PlanetScope Ortho Tile (`PSOrthoTile`)
+- *Reference*: [Planet Imagery Product Specifications, Appendix B - Tile Grid Definition](https://assets.planet.com/docs/Planet_Combined_Imagery_Product_Specs_letter_screen.pdf)
 
 ## Contributing
 
