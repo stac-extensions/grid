@@ -23,6 +23,7 @@
       - [Copernicus Digital Elevation Model Grid](#copernicus-digital-elevation-model-grid)
       - [EEA Reference Grid](#eea-reference-grid)
       - [Major TOM Grid](#major-tom-grid)
+      - [TanDEM-X DEM Tile Grid](#tandem-x-dem-tile-grid)
 - [Contributing](#contributing)
 - [Running tests](#running-tests)
 - [Grid Maps](#grid-maps)
@@ -30,6 +31,7 @@
   - [Sentinel-2 (MGRS)](#sentinel-2-mgrs)
   - [Copernicus DEM (CDEM)](#copernicus-dem-cdem)
   - [NAIP (DOQQ)](#naip-doqq)
+  - [TanDEM-X DEM (TDM)](#tandem-x-dem-tdm)
 
 This document explains the Grid Extension to the [SpatioTemporal Asset Catalog](https://github.com/radiantearth/stac-spec) (STAC) specification.
 
@@ -213,6 +215,24 @@ that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
   - [Paper](https://arxiv.org/abs/2402.12095)
   - [GitHub repository](https://github.com/ESA-PhiLab/Major-TOM)
 
+##### TanDEM-X DEM Tile Grid
+
+- *Format String*: `TDM-{northing}{easting}`
+- *Examples*: TDM-N50E011, TDM-N61E016, TDM-N80E012
+- *Components*:
+  - `northing`: `N` or `S` followed by the latitude in whole degrees, two digits, e.g., `S50` or `N00`.
+  - `easting`: `E` or `W` followed by the longitude in whole degrees, three digits, e.g., `W018` or `E006`.
+- *Notes*: Each grid square is 1° high. Its width depends on the latitude:
+  1° between 60° S and 60° N, 2° between 60° and 80° N/S, and 4° between 80° and 90° N/S.
+  The code refers to the lower left (south-west) corner of the tile, as in the tile names of the
+  TanDEM-X products (e.g., `TDM1_DEM__30_N61E016`).
+  The longitude of 2° wide tiles is a multiple of 2 and the longitude of 4° wide tiles is a multiple of 4,
+  e.g., `TDM-N61E016` covers 16° E to 18° E and there is no tile `TDM-N61E017`.
+  This differs from the Copernicus DEM grid (`CDEM`), which has 1° × 1° tiles at all latitudes.
+- *Products*: TanDEM-X DEM (12 m, 30 m, 90 m), TanDEM-X DEM 2020, TanDEM-X 30m Edited DEM,
+  TanDEM-X Forest/Non-Forest Map
+- *Reference*: [TanDEM-X DEM Products Specification Document, section 4.4.3](https://elib.dlr.de/223711/1/TD-GS-PS-0021_DEM-Product-Specification_v4.0.pdf)
+
 ## Contributing
 
 All contributions are subject to the
@@ -328,3 +348,15 @@ cd scripts
 
 In the Tennessee 2018 geometries, NW3408508 is set with a null geometry. However,
 this grid cell overlaps with Georgia, so it's picked up from those definitions.
+
+### TanDEM-X DEM (TDM)
+
+The cells follow from the tile extents in the
+[TanDEM-X DEM Products Specification Document](https://elib.dlr.de/223711/1/TD-GS-PS-0021_DEM-Product-Specification_v4.0.pdf),
+so they are computed instead of downloaded.
+These are all Polygons and have no antimeridian-spanning cells.
+
+```bash
+python scripts/tdm_grid.py > tdm.geojson
+python scripts/grid_maker.py TDM code 0 0 tdm.geojson > grid_maps/tdm.json
+```
