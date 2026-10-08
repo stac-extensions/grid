@@ -23,6 +23,7 @@
       - [Copernicus Digital Elevation Model Grid](#copernicus-digital-elevation-model-grid)
       - [EEA Reference Grid](#eea-reference-grid)
       - [Major TOM Grid](#major-tom-grid)
+      - [AdV Tile Grid](#adv-tile-grid)
 - [Contributing](#contributing)
 - [Running tests](#running-tests)
 - [Grid Maps](#grid-maps)
@@ -212,6 +213,28 @@ that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
 - *Reference*:
   - [Paper](https://arxiv.org/abs/2402.12095)
   - [GitHub repository](https://github.com/ESA-PhiLab/Major-TOM)
+
+##### AdV Tile Grid
+
+The tile grid of the Working Committee of the Surveying Authorities of the States of the
+Federal Republic of Germany (AdV) for official raster and point cloud data, e.g., digital orthophotos.
+
+- *Format String*: `ADV-{zone}_{easting}_{northing}_{size}`
+- *Examples*: ADV-32_642_5648_1, ADV-33_250_5886_1, ADV-32_304_5674_2
+- *Components*:
+  - `zone`: UTM zone of the CRS ETRS89 / UTM, two digits, `32` (EPSG:25832) or `33` (EPSG:25833)
+  - `easting`: easting of the lower left corner in kilometres, three digits
+  - `northing`: northing of the lower left corner in kilometres, four digits
+  - `size`: edge length of the tile in kilometres, one digit, `1` or `2`
+- *Notes*: Tiles are 1 km × 1 km, aligned to whole kilometres, or 2 km × 2 km, aligned to
+  even kilometres. The code refers to the lower left (south-west) corner of the tile.
+  The components equal the tile key in the AdV file names,
+  e.g., `dop20rgbi_32_642_5648_1_th_2024` becomes `ADV-32_642_5648_1`.
+- *Products*: Digital orthophotos (DOP), digital terrain and surface models (DGM, DOM)
+  and 3D measurement data of the German state survey agencies
+- *Reference*:
+  - [AdV product and quality standard for digital orthophotos, version 4.1, section 3.7 (German)](https://www.adv-online.de/sites/default/files/documents/2026-04/PQS_DOP.pdf)
+  - [AdV product and quality standard for digital terrain models, version 3.3, section 3.5 (German)](https://www.adv-online.de/sites/default/files/documents/2026-07/PQS_DGM_V3.3_2025-03-27.pdf)
 
 ## Contributing
 
