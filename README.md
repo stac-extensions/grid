@@ -23,6 +23,9 @@
       - [Copernicus Digital Elevation Model Grid](#copernicus-digital-elevation-model-grid)
       - [EEA Reference Grid](#eea-reference-grid)
       - [Major TOM Grid](#major-tom-grid)
+      - [AdV Tile Grid](#adv-tile-grid)
+      - [SPOT Reference Grid (GRS)](#spot-reference-grid-grs)
+      - [Planet Mosaic Quad Grid](#planet-mosaic-quad-grid)
       - [Planet Ortho Tile Grid](#planet-ortho-tile-grid)
 - [Contributing](#contributing)
 - [Running tests](#running-tests)
@@ -75,8 +78,12 @@ once for each all the Items in that grid square.
 The field `grid:code` defines a unique value for each grid square in a gridding. The code
 will be of the form `{grid designation}-{grid square code}`, where the grid designation is a
 short alphanumeric code for the grid (e.g., MGRS) and code is a short encoded value for a
-specific grid square. The encoded value for the square should consist of uppercase
-alphanumeric characters, underscore (`_`) (preferred separator), or minus sign (`-`).
+specific grid square. The encoded value for the square should consist of alphanumeric
+characters, underscore (`_`) (preferred separator), minus sign (`-`), or dot (`.`).
+Letters should be uppercase unless the format of the grid defines otherwise
+(e.g., the resolution `100km` in the EEA Reference Grid).
+Numeric components have the fixed width given for the grid and are padded with leading zeros,
+so that each grid square has exactly one code.
 
 The grid code values below are recommended for these products. Implementers may also devise
 proprietary systems for their own griddings.
@@ -86,7 +93,7 @@ proprietary systems for their own griddings.
 - *Format String*: `MGRS-{grid zone designator}{latitude band}{square}`
 - *Examples*: MGRS-35NKA, MGRS-35NKA1234, MGRS-35NKA123456, MGRS-35NKA12345678, MGRS-35NKA1234567890
 - *Components*:
-  - `grid zone designator`: UTM grid zone
+  - `grid zone designator`: UTM grid zone, two digits, e.g., `01` or `35`
   - `latitude band`: latitude band, lettered C-X (omitting the letters "I" and "O")
   - `square`: a pair of letters designating one of the 100km side grid squares within the grid
     zone and latitude band square, and optionally either 2, 4, 6, 8, or 10 additional digits
@@ -97,10 +104,10 @@ proprietary systems for their own griddings.
 ##### MODIS Sinusoidal Tile Grid
 
 - *Format String*: `MSIN-{horizontal}{vertical}`
-- *Example*: MSIN-2506
+- *Examples*: MSIN-2506, MSIN-0008
 - *Components*:
-  - `horizontal`: horizontal tile number
-  - `vertical`: vertical tile number
+  - `horizontal`: horizontal tile number, two digits (`00` to `35`)
+  - `vertical`: vertical tile number, two digits (`00` to `17`)
 - *Products*: many MODIS products, including MCD43A4, MxD11A1, and MxD13A1
 - *Reference*: <https://modis-land.gsfc.nasa.gov/MODLAND_grid.html>
 
@@ -109,8 +116,8 @@ proprietary systems for their own griddings.
 - *Format String*: `WRS1-{path}{row}`
 - *Example*: WRS1-097073
 - *Components*:
-  - `path`: path number for nominal satellite orbital track
-  - `row`: latitudinal center line of a frame of imagery
+  - `path`: path number for nominal satellite orbital track, three digits
+  - `row`: latitudinal center line of a frame of imagery, three digits
 - *Products*: Landsat 1-3
 - *Reference*: <https://landsat.gsfc.nasa.gov/about/the-worldwide-reference-system/>
 
@@ -119,8 +126,8 @@ proprietary systems for their own griddings.
 - *Format String*: `WRS2-{path}{row}`
 - *Example*: WRS2-097073
 - *Components*:
-  - `path`: path number for nominal satellite orbital tracks
-  - `row`: latitudinal center line of a frame of imagery
+  - `path`: path number for nominal satellite orbital tracks, three digits
+  - `row`: latitudinal center line of a frame of imagery, three digits
 - *Products*: Landsat 4, 5, 7, 8, and 9
 - *Reference*: <https://landsat.gsfc.nasa.gov/about/the-worldwide-reference-system/>
 
@@ -175,8 +182,10 @@ that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
 - *Format String*: `CDEM-{northing}{easting}`
 - *Example*: CDEM-S90W178
 - *Components*:
-  - `northing`: latitude coordinate in decimal degrees without the decimal `_00` part, e.g., `S50`.
-  - `easting`: longitude coordinate in decimal degrees without the decimal `_00` part, e.g., `W125`.
+  - `northing`: `N` or `S` followed by the latitude in whole degrees, two digits, e.g., `S50` or `N00`.
+  - `easting`: `E` or `W` followed by the longitude in whole degrees, three digits, e.g., `W125` or `E006`.
+- *Notes*: Each grid square is a 1° × 1° tile. The code refers to the lower left (south-west)
+  corner of the tile, as in the tile names of the Copernicus DEM (e.g., `N00_00_E006_00`).
 - *Products*: Copernicus DEM GLO-30, GLO-90, and EEA-10 products in DGED format
 - *Reference*: [Copernicus DEM Product Handbook](https://dataspace.copernicus.eu/sites/default/files/media/files/2024-06/geo1988-copernicusdem-spe-002_producthandbook_i5.0.pdf)
 
@@ -213,6 +222,75 @@ that of the 7.5-minute quad, followed by NE, NW, SW, or SE for the DOQQ.
 - *Reference*:
   - [Paper](https://arxiv.org/abs/2402.12095)
   - [GitHub repository](https://github.com/ESA-PhiLab/Major-TOM)
+
+##### AdV Tile Grid
+
+The tile grid of the Working Committee of the Surveying Authorities of the States of the
+Federal Republic of Germany (AdV) for official raster and point cloud data, e.g., digital orthophotos.
+
+- *Format String*: `ADV-{zone}_{easting}_{northing}_{size}`
+- *Examples*: ADV-32_642_5648_1, ADV-33_250_5886_1, ADV-32_304_5674_2
+- *Components*:
+  - `zone`: UTM zone of the CRS ETRS89 / UTM, two digits, `32` (EPSG:25832) or `33` (EPSG:25833)
+  - `easting`: easting of the lower left corner in kilometres, three digits
+  - `northing`: northing of the lower left corner in kilometres, four digits
+  - `size`: edge length of the tile in kilometres, one digit, `1` or `2`
+- *Notes*: Tiles are 1 km × 1 km, aligned to whole kilometres, or 2 km × 2 km, aligned to
+  even kilometres. The code refers to the lower left (south-west) corner of the tile.
+  The components equal the tile key in the AdV file names,
+  e.g., `dop20rgbi_32_642_5648_1_th_2024` becomes `ADV-32_642_5648_1`.
+- *Products*: Digital orthophotos (DOP), digital terrain and surface models (DGM, DOM)
+  and 3D measurement data of the German state survey agencies
+- *Reference*:
+  - [AdV product and quality standard for digital orthophotos, version 4.1, section 3.7 (German)](https://www.adv-online.de/sites/default/files/documents/2026-04/PQS_DOP.pdf)
+  - [AdV product and quality standard for digital terrain models, version 3.3, section 3.5 (German)](https://www.adv-online.de/sites/default/files/documents/2026-07/PQS_DGM_V3.3_2025-03-27.pdf)
+
+##### SPOT Reference Grid (GRS)
+
+- *Format String*: `SPOTGRS-{K}_{J}`
+- *Examples*: SPOTGRS-597_276, SPOTGRS-090_353
+- *Components*:
+  - `K`: column number, written with 3 digits (zero-padded).
+    Outside the polar zones, the columns follow the SPOT reference tracks N (1 to 369):
+    column K = 2N-1 is west of track N and column K = 2N is east of it, so K goes from 001 to 738.
+  - `J`: row number, written with 3 digits (zero-padded).
+    Outside the polar zones, the rows are parallels, numbered from north to south from 200 to 500.
+    The north and south polar zones (beyond 71.7°) use a separate grid of nodes about 26 km apart,
+    centred on K = 100, J = 100 (north pole) and K = 100, J = 600 (south pole).
+- *Notes*: A scene gets the K and J of the grid node nearest to its centre.
+  A scene shifted along the track (SAT scene) keeps the K and J of its node;
+  the shift is not part of the grid code.
+- *Products*: SPOT 1 to 5 scenes, for example the SPOT World Heritage archive of CNES
+- *Reference*: SPOT Image, *Grille de Référence SPOT* (SI/GP/86.0005, annex 1),
+  available with the SPOT product specifications on the
+  [SPOT World Heritage documentation page](https://regards.cnes.fr/user/swh/modules/54)
+- *Related Extensions*: <https://github.com/CNES/spot-stac-extension>
+
+##### Planet Mosaic Quad Grid
+
+The Web Mercator grid of the quads in which Planet delivers its basemaps and mosaics
+(e.g., PlanetScope surface reflectance mosaics).
+
+- *Format String*: `PLQ-L{level}-{x}E-{y}N`
+- *Example*: PLQ-L15-1107E-1360N
+- *Components*:
+  - `level`: zoom level of the mosaic, two digits (e.g., `15` for standard mosaics, `16` for higher-resolution mosaics)
+  - `x`: quad column, four digits, increasing from west to east, starting at `0000` at 180° W
+  - `y`: quad row, four digits, increasing from **south** to north, starting at `0000` at the southern edge of the grid
+- *Notes*: The grid is defined in WGS 84 / Pseudo-Mercator (EPSG:3857), which spans
+  −20037508.342789244 to 20037508.342789244 m on both axes.
+  A quad has 4096 × 4096 pixels with a pixel size of 40075016.685578488 / (256 × $2^{level}$) m
+  (4.7773 m at level 15) at the equator, so there are $2^{level-4}$ quads per axis (2048 at level 15).
+  The south-west corner of a quad, in metres, is
+  x = −20037508.342789244 + x × 4096 × pixel size and y = −20037508.342789244 + y × 4096 × pixel size.
+  A level-`n` quad covers the same area as the XYZ tile of zoom `n − 4` with column `x` and row $2^{n-4} - 1 - y$
+  (counted from the north).
+  The code follows the names of Planet's quad downloads, e.g. `L15-1107E-1360N.tif`.
+  Planet's API identifies a quad within a mosaic as `{x}-{y}` (e.g., `1107-1360`) without zero-padding or level.
+- *Products*: Planet Basemaps and Mosaics, e.g. PlanetScope Normalized Surface Reflectance Mosaics
+- *Reference*:
+  - [Planet Mosaics documentation](https://docs.planet.com/data/imagery/mosaics/)
+  - [PlanetScope Mosaics Technical Specification](https://docs.planet.com/data/imagery/mosaics/techspec/)
 
 ##### Planet Ortho Tile Grid
 
