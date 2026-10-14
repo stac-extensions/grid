@@ -16,6 +16,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - EEA Reference Grid
 - Major TOM Grid
+- Planet Mosaic Quad Grid
+
+### Changed
+
+- Clarified that numeric components of grid codes are zero-padded to a fixed width,
+  with the widths for MGRS, MSIN, WRS-1, WRS-2 and CDEM
+- Clarified that CDEM codes refer to the south-west corner of 1° × 1° tiles
+- Aligned the allowed characters for grid square codes with the JSON schema
 
 ## [1.1.0]
 
