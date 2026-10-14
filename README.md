@@ -270,21 +270,25 @@ Federal Republic of Germany (AdV) for official raster and point cloud data, e.g.
 The Web Mercator grid of the quads in which Planet delivers its basemaps and mosaics
 (e.g., PlanetScope surface reflectance mosaics).
 
-- *Format String*: `PLQ-L{level}-{x}E-{y}N`
-- *Example*: PLQ-L15-1107E-1360N
+- *Format String*: `PLQ-L{level}-{size}-{x}E-{y}N`
+- *Example*: PLQ-L15-4096-1107E-1360N
 - *Components*:
   - `level`: zoom level of the mosaic, two digits (e.g., `15` for standard mosaics, `16` for higher-resolution mosaics)
-  - `x`: quad column, four digits, increasing from west to east, starting at `0000` at 180° W
-  - `y`: quad row, four digits, increasing from **south** to north, starting at `0000` at the southern edge of the grid
+  - `size`: quad size in pixels, without padding (e.g., `4096` or `2048`), as given by the mosaic (`grid.quad_size` in Planet's Basemaps API)
+  - `x`: quad column, zero-padded to at least four digits, increasing from west to east, starting at `0000` at 180° W
+  - `y`: quad row, zero-padded to at least four digits, increasing from **south** to north,
+    starting at `0000` at the southern edge of the grid
 - *Notes*: The grid is defined in WGS 84 / Pseudo-Mercator (EPSG:3857), which spans
   −20037508.342789244 to 20037508.342789244 m on both axes.
-  A quad has 4096 × 4096 pixels with a pixel size of 40075016.685578488 / (256 × $2^{level}$) m
-  (4.7773 m at level 15) at the equator, so there are $2^{level-4}$ quads per axis (2048 at level 15).
+  The pixel size is 40075016.685578488 / (256 × $2^{level}$) m (4.7773 m at level 15) at the equator.
+  The quad size varies per mosaic, so the same `level`, `x` and `y` denote different areas for different sizes.
+  A quad has `size` × `size` pixels, so there are $2^{level} × 256 / size$ quads per axis (2048 at level 15 with 4096 pixels).
   The south-west corner of a quad, in metres, is
-  x = −20037508.342789244 + x × 4096 × pixel size and y = −20037508.342789244 + y × 4096 × pixel size.
-  A level-`n` quad covers the same area as the XYZ tile of zoom `n − 4` with column `x` and row $2^{n-4} - 1 - y$
+  x = −20037508.342789244 + x × size × pixel size and y = −20037508.342789244 + y × size × pixel size.
+  A quad covers the same area as the XYZ tile of zoom $level − \log_2(size / 256)$
+  (e.g., `11` for a level-15 mosaic with 4096 pixels) with column `x` and row (quads per axis − 1 − `y`)
   (counted from the north).
-  The code follows the names of Planet's quad downloads, e.g. `L15-1107E-1360N.tif`.
+  Apart from the quad size, the code follows the names of Planet's quad downloads, e.g. `L15-1107E-1360N.tif`.
   Planet's API identifies a quad within a mosaic as `{x}-{y}` (e.g., `1107-1360`) without zero-padding or level.
 - *Products*: Planet Basemaps and Mosaics, e.g. PlanetScope Normalized Surface Reflectance Mosaics
 - *Reference*:
