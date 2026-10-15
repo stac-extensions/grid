@@ -14,10 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- AdV Tile Grid
 - EEA Reference Grid
 - Major TOM Grid
-- AdV Tile Grid
 - Planet Mosaic Quad Grid
+- TanDEM-X DEM Tile Grid
 
 ### Changed
 
