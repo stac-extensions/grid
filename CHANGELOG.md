@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Planet Mosaic Quad Grid
 - Planet Ortho Tile Grid
 - SPOT Reference Grid (GRS)
+- TanDEM-X DEM Tile Grid
 
 ### Changed
 
